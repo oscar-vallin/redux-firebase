@@ -1,0 +1,18 @@
+.session  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.session h1,h2 {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.session button{
+    padding: 15px 1.5rem;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: 600;
+    border: 2px solid #0016b0;
+    background-color: #1883ba
+}
