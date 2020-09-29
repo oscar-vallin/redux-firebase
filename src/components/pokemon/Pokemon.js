@@ -1,18 +1,31 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
-const Pokemon = () => {
-    const [poke, getPoke] =useState([]);
-
-    useEffect(() => {
-        axios.get('https://pokeapi.co/api/v2/pokemon/ditto')
+const Pokemon = ({pokes}) => {
+  const [pokemon,getPoke] = useState('');  
+  const handler = poke => {
+    getPoke(poke.target.value)
+  }
+  const poke = () => {
+    const name =   pokes.filter(p => p.name === pokemon)
+        axios.get(name[0].url)
             .then(data => {
-                let pok = data.data.sprites.front_default
-                getPoke(prevState => prevState.poke = pok)
-            })
-    },[])
+                console.log(data.data.sprites)
+            });
+}
     return(
-        <img src={poke} alt="poke"/>
+        <div>
+            <h3>Choose your favorites Pokemon</h3>
+            <input type="text"  onChange={handler}/>
+            <button onClick={poke}>Get Pokemon</button>
+        </div>
+    );
+};
+const mapState = ({poke: pokes}) => {
+    return(
+        pokes
     )
 }
-export default Pokemon;
+export default connect(mapState)(Pokemon);
+
